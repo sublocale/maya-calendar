@@ -108,7 +108,7 @@ def strpdate(data_string, format = '%Y-%m-%d', bc = False):
         format_regex = _TimeRE_cache.compile(format)
     # KeyError raised when a bad format is found; can be specified as
     # \\, in which case it was a stray % but with a space after it
-    except KeyError, err:
+    except KeyError as err:
         bad_directive = err.args[0]
         if bad_directive == "\\":
             bad_directive = "%"
@@ -128,7 +128,7 @@ def strpdate(data_string, format = '%Y-%m-%d', bc = False):
                           data_string[found.end():])
     date = list(todaydatetuple())
     found_dict = found.groupdict()
-    for group_key in found_dict.iterkeys():
+    for group_key in found_dict.keys():
         if group_key == 'y':
             date[0] = int(found_dict['y'])
             if date[0] <= 68:
@@ -213,5 +213,5 @@ if __name__ == '__main__':
             befc = True
         elif p == '--no-l10n':
             _ = N_
-    print getmayandate(strpdate(gdate, gformat, befc), \
-            correlation, mformat, scen, befc)
+    print(getmayandate(strpdate(gdate, gformat, befc), \
+            correlation, mformat, scen, befc))
